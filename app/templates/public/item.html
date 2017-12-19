@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>Item Description</h1>
+</div>
+
+<br>
+item name : {{ item.name }}
+price : {{ item.price }}
+num : {{ item.num }}
+description : {{ item.desc }}
+category: {{ item.cate.name }}
+<br>
+<a href="{{ url_for('add2cart', id={{ item.id }}) ">add2cart</a>
+<a href="{{ url_for('buy', id={{ item.id }}) ">buy</a>
+<br>
+
+{% endblock %}

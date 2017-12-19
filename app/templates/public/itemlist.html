@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>Item List</h1>
+</div>
+<div class="container main-container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td><b>Img</b></td>
+                <td><b>Name</b></td>
+                <td><b>Price</b></td>
+                <td><b>Num</b></td>
+            </tr>
+        </thead>
+        <tbody>
+        {% for item in items %}
+            <a href="{{ url_for('item', item_id={{ item.id }} }}">
+                <tr>
+                    <!-- <td><span></span></td> -->
+                    <td><span>{{ item.name }}</span></td>
+                    <td><span>{{ item.price }}</span></td>
+                    <td><span>{{ item.num }}</span></td>
+                </tr>
+            </a>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<br>
+{% endblock %}
