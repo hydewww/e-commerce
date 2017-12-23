@@ -5,16 +5,18 @@
 <div class="page-header">
     <h1>Item Description</h1>
 </div>
-
-<br>
 item name : {{ item.name }}
+<br>
 price : {{ item.price }}
+<br>
 num : {{ item.num }}
+<br>
 description : {{ item.desc }}
+<br>
 category: {{ item.cate.name }}
 <br>
-<a href="{{ url_for('add2cart', id={{ item.id }}) ">add2cart</a>
-<a href="{{ url_for('buy', id={{ item.id }}) ">buy</a>
 <br>
-
+<a href="{{ url_for('private.add2cart', id=item.id) }}">add2cart</a>
+<br>
+<a href="{{ url_for('private.buy', id=item.id) }}">buy</a>
 {% endblock %}

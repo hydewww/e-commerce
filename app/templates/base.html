@@ -15,10 +15,16 @@
             <a class="navbar-brand" href="/">不存在的淘宝</a>
         </div>
         <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="{{ url_for('private.cart') }}">Cart</a></li>
+                <li><a href="{{ url_for('private.order') }}">Order</a></li>
+            </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if current_user.is_authenticated %}
+                <li><a href="{{ url_for('admin.upload') }}">Upload</a></li>                
                 <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
                 {% else %}
+                <li><a href="{{ url_for('auth.register') }}">Register</a></li>
                 <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
                 {% endif %}
             </ul>

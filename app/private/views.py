@@ -8,15 +8,20 @@ from sqlalchemy import desc
 @private.route("/cart")
 @login_required
 def cart():
+    cart = Cart.query.filter_by(user_id=current_user.id).all()
     items = current_user.items
-    return render_template("private/cart.html", items=items)
+    return render_template("private/cart.html", items=items, cart=cart)
 
 
 @private.route("/order")
 @login_required
 def order():
     orders = Order.query.filter_by(buyer_id=current_user.id).all()
-    return render_template("private/order.html", orders=orders)
+    itemslist = []
+    for order in orders:
+        items = Order_Item.query.filter_by(order_id=order.id).all()
+        itemslist.append(items)
+    return render_template("private/order.html", orders=orders, itemslist=itemslist)
 
 
 @private.route("/add2cart/<int:id>")
@@ -30,13 +35,13 @@ def add2cart(id):
         cart = Cart(user_id=current_user.id, item_id=item.id)
     db.session.add(cart)
     db.session.commit()
-    return redirect(url_for('main.index'))
+    return redirect(url_for('private.cart'))
 
 
 @private.route("/buy/cart")
 @login_required
 def buy_cart():
-    cart_items = Cart.query.filter(user_id=current_user.id).all()
+    cart_items = Cart.query.filter_by(user_id=current_user.id).all()
     if cart_items is None:
         return redirect(url_for("main.index"))
     order = Order(buyer_id=current_user.id)

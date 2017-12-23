@@ -3,31 +3,31 @@
 
 {% block page_content %}
 <div class="page-header">
-    <h1>Item List</h1>
+    <h1>Order List</h1>
 </div>
 <div class="container main-container">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <td><b>Img</b></td>
-                <td><b>Name</b></td>
-                <td><b>Price</b></td>
-                <td><b>Num</b></td>
-            </tr>
-        </thead>
-        <tbody>
-        {% for item in items %}
-            <a href="{{ url_for('item', item_id={{ item.id }} }}">
-                <tr>
-                    <!-- <td><span></span></td> -->
-                    <td><span>{{ item.name }}</span></td>
-                    <td><span>{{ item.price }}</span></td>
-                    <td><span>{{ item.num }}</span></td>
-                </tr>
-            </a>
-        {% endfor %}
-        </tbody>
-    </table>
+    {% for order in orders %}
+        <div>{{ order.date }}</div>
+        <table class="table table-striped">
+            <thead>
+                    <tr>
+                        <td><b>Img</b></td>
+                        <td><b>Item Id</b></td>
+                        <td><b>Num</b></td>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for item in itemslist[order.id-1] %}
+                    <tr>
+                        <td><span>img</span></td>
+                        <td><span>{{ item.item_id }}</span></td>
+                        <td><span>{{ item.num }}</span></td>
+                        <td><a href="{{ url_for('public.item', item_id=item.id) }}">More</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+        </table>
+    {% endfor %}
 </div>
 <br>
 {% endblock %}
