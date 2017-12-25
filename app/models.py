@@ -57,16 +57,18 @@ class Item(db.Model):
     price = db.Column(db.Integer)
     num = db.Column(db.Integer)
     desc = db.Column(db.Text)
+    owner_id = db.Column(db.Integer)
     cate_id = db.Column(db.Integer, db.ForeignKey('cates.id'))
     orders = db.relationship('Order', secondary='order_item', backref='item')
     users = db.relationship('User', secondary='carts', backref='item')
 
-    def __init__(self, name, price, num, desc, cate_id):
+    def __init__(self, name, price, num, desc, cate_id, owner_id):
         self.name = name
         self.price = price
         self.num = num
         self.desc = desc
         self.cate_id = cate_id
+        self.owner_id = owner_id
 
     def __repr__(self):
         return '<Item %r>' % self.name
@@ -75,11 +77,14 @@ class Order(db.Model):
     __tablename__ = 'orders'
     id = db.Column(db.Integer, primary_key=True)
     buyer_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     date = db.Column(db.DateTime, default=datetime.datetime.now)
+    status = db.Column(db.Boolean, default=False)
     items = db.relationship('Item', secondary='order_item', backref='order')
 
-    def __init__(self, buyer_id):
+    def __init__(self, buyer_id, owner_id):
         self.buyer_id = buyer_id
+        self.owner_id = owner_id
 
 
 class Order_Item(db.Model):

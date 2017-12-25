@@ -17,7 +17,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                {% for item in itemslist[order.id-1] %}
+                {% for item in itemslist[loop.index0] %}
                     <tr>
                         <td><span>img</span></td>
                         <td><span>{{ item.item_id }}</span></td>
@@ -27,6 +27,8 @@
                 {% endfor %}
                 </tbody>
         </table>
+        <div>{% if order.status %}已发货{% else %}未发货{% endif %}</div>
+        <br>
     {% endfor %}
 </div>
 <br>

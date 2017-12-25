@@ -31,10 +31,12 @@
     <h1>Item List</h1>
 </div>
 <div class="categories-bar">
+    {% if cates != None %}
     <div class="label" ><a href="{{ url_for('public.index') }}">All</a></div>
     {% for cate in cates %}
     <div class="label" ><a href="{{ url_for('public.cate', cate_id=cate.id) }}">{{cate.name}}</a></div>
     {% endfor %}
+    {% endif %}
 </div>
 <br>
 <div class="container main-container">

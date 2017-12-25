@@ -16,12 +16,13 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="{{ url_for('private.cart') }}">Cart</a></li>
-                <li><a href="{{ url_for('private.order') }}">Order</a></li>
+                <li><a href="{{ url_for('buy.cart') }}">Cart</a></li>
+                <li><a href="{{ url_for('buy.order') }}">Order</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                {% if current_user.is_authenticated %}
-                <li><a href="{{ url_for('admin.upload') }}">Upload</a></li>                
+                <li><a href="{{ url_for('sell.order') }}">Order</a></li>
+                <li><a href="{{ url_for('sell.upload') }}">Upload</a></li>
+                {% if current_user.is_authenticated %}                
                 <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
                 {% else %}
                 <li><a href="{{ url_for('auth.register') }}">Register</a></li>

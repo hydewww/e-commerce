@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block page_content %}
+<div class="page-header">
+    <h1>Order List</h1>
+</div>
+<div class="container main-container">
+    {% for order in orders %}
+        <div>{{ order.date }}</div>
+        <table class="table table-striped">
+            <thead>
+                    <tr>
+                        <td><b>Img</b></td>
+                        <td><b>Item Id</b></td>
+                        <td><b>Num</b></td>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for item in itemslist[loop.index0] %}
+                    <tr>
+                        <td><span>img</span></td>
+                        <td><span>{{ item.item_id }}</span></td>
+                        <td><span>{{ item.num }}</span></td>
+                        <td><a href="{{ url_for('public.item', item_id=item.id) }}">More</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+        </table>
+        <div>{% if order.status %}已发货{% else %}未发货，<a href="{{ url_for('sell.deliver', order_id=order.id) }}">发货</a>{% endif %}</div>
+        <br>
+    {% endfor %}
+</div>
+<br>
+{% endblock %}

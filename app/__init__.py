@@ -28,10 +28,10 @@ def create_app():
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint)
 
-    from .private import private as private_blueprint
-    app.register_blueprint(private_blueprint, url_prefix='/my')
+    from .buy import buy as buy_blueprint
+    app.register_blueprint(buy_blueprint, url_prefix='/my')
 
-    from .admin import admin as admin_blueprint
-    app.register_blueprint(admin_blueprint, url_prefix='/admin')
+    from .sell import sell as sell_blueprint
+    app.register_blueprint(sell_blueprint, url_prefix='/sell')
 
     return app

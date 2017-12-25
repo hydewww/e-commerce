@@ -18,6 +18,12 @@ def cate(cate_id):
     return render_template("public/itemlist.html", items=items, cates=cates)
 
 
+@public.route('/owner/<int:owner_id>')
+def owner(owner_id):
+    items = Item.query.filter_by(owner_id=owner_id).all()
+    return render_template("public/itemlist.html", items=items)
+
+
 @public.route('/item/<int:item_id>')
 def item(item_id):
     item = Item.query.filter_by(id=item_id).first_or_404()
