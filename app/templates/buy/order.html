@@ -19,10 +19,10 @@
                 <tbody>
                 {% for item in itemslist[loop.index0] %}
                     <tr>
-                        <td><span>img</span></td>
-                        <td><span>{{ item.item_id }}</span></td>
-                        <td><span>{{ item.num }}</span></td>
-                        <td><a href="{{ url_for('public.item', item_id=item.id) }}">More</a></td>
+                        <td><span><img src="{{ images.url(imag_name[item.id])}}" height=100px" width="100px"></span></td>
+                        <td><span style="line-height: 90px">{{ item.item_id }}</span></td>
+                        <td><span style="line-height: 90px">{{ item.num }}</span></td>
+                        <td><a href="{{ url_for('public.item', item_id=item.id) }}" style="line-height: 90px">More</a></td>
                     </tr>
                 {% endfor %}
                 </tbody>

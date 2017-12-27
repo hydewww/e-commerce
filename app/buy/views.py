@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect, url_for
 from . import buy
-from .. import db
+from .. import db,images,imag_name
 from ..models import Item, Order, Cart, Order_Item
 from flask_login import login_required, current_user
 from sqlalchemy import desc
@@ -21,7 +21,7 @@ def order():
     for order in orders:
         items = Order_Item.query.filter_by(order_id=order.id).all()
         itemslist.append(items)
-    return render_template("buy/order.html", orders=orders, itemslist=itemslist)
+    return render_template("buy/order.html", orders=orders, itemslist=itemslist,images=images,imag_name=imag_name)
 
 
 @buy.route("/add2cart/<int:id>")

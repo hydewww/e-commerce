@@ -8,9 +8,11 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'data.sqlite')
     
-    UPLOADED_IMAGES_DEST = basedir + 'images'
+    UPLOADED_IMAGES_DEST = basedir + '\images'
     DEBUG = True
     
     @staticmethod
     def init_app(app):
         pass
+
+
