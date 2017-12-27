@@ -55,7 +55,7 @@
         <tbody>
         {% for item in items %}
             <tr>
-                <td><span><img src="{{ images.url(imag_name[item.id])}}" height="100px" width="100px"></span></td>
+                <td><span><img src="{{ images.url(item.img)}}" height="100px" width="100px"></span></td>
                 <td><span class="td-font">{{ item.name }}</span></td>
                 <td><span class="td-font">{{ item.price }}</span></td>
                 <td><span class="td-font">{{ item.num }}</span></td>

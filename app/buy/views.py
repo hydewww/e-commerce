@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect, url_for
 from . import buy
-from .. import db, images, imag_name
+from .. import db, images
 from ..models import Item, Order, Cart, Order_Item
 from flask_login import login_required, current_user
 from sqlalchemy import desc
@@ -10,7 +10,7 @@ from sqlalchemy import desc
 def cart():
     cart = Cart.query.filter_by(user_id=current_user.id).all()
     items = current_user.items
-    return render_template("buy/cart.html", items=items, cart=cart)
+    return render_template("buy/cart.html", items=items, cart=cart, images=images)
 
 
 @buy.route("/order")
@@ -18,10 +18,14 @@ def cart():
 def order():
     orders = Order.query.filter_by(buyer_id=current_user.id).all()
     itemslist = []
+    img_dict = {}
     for order in orders:
         items = Order_Item.query.filter_by(order_id=order.id).all()
+        for item in items:
+            item_img = Item.query.filter_by(id=item.item_id).first().img
+            img_dict[item.item_id] = item_img
         itemslist.append(items)
-    return render_template("buy/order.html", orders=orders, itemslist=itemslist, images=images ,imag_name=imag_name)
+    return render_template("buy/order.html", orders=orders, itemslist=itemslist, images=images, img_dict=img_dict)
 
 
 @buy.route("/add2cart/<int:id>")

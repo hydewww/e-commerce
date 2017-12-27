@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect, url_for
 from . import public
-from .. import db, imag_name, images
+from .. import db, images
 from ..models import Item, Cate
 
 
@@ -8,7 +8,7 @@ from ..models import Item, Cate
 def index():
     cates = Cate.query.all()
     items = Item.query.all()
-    return render_template("public/itemlist.html", items=items, cates=cates, imag_name=imag_name, images=images)
+    return render_template("public/itemlist.html", items=items, cates=cates, images=images)
 
 
 @public.route('/cate/<int:cate_id>')

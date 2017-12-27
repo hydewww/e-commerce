@@ -1,6 +1,6 @@
 from flask import render_template, redirect, url_for, flash
 from . import sell
-# from .. import db, images, imag_name
+# from .. import db, images
 from .. import db, images
 from ..models import Item, Cate, Order_Item, Order
 from flask_login import login_required, current_user

@@ -2,6 +2,13 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block page_content %}
+
+<style>
+    .td-font{
+        line-height: 90px;
+    }
+</style>
+
 <div class="page-header">
     <h1>Cart List</h1>
 </div>
@@ -18,11 +25,11 @@
         <tbody>
         {% for item in items %}
             <tr>
-                <td><span>img</span></td>
-                <td><span>{{ item.name }}</span></td>
-                <td><span>{{ item.price }}</span></td>
-                <td><span>{{ cart[loop.index0].num }}</span></td>
-                <td><a href="{{ url_for('public.item', item_id=item.id) }}">More</a></td>
+                <td><span><img src="{{ images.url(item.img)}}" height="100px" width="100px"></span></td>
+                <td><span class="td-font">{{ item.name }}</span></td>
+                <td><span class="td-font">{{ item.price }}</span></td>
+                <td><span class="td-font">{{ cart[loop.index0].num }}</span></td>
+                <td><a href="{{ url_for('public.item', item_id=item.id) }}"class="td-font">More</a></td>
             </tr>
         {% endfor %}
         </tbody>
