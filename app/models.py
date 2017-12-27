@@ -59,6 +59,7 @@ class Item(db.Model):
     desc = db.Column(db.Text)
     owner_id = db.Column(db.Integer)
     cate_id = db.Column(db.Integer, db.ForeignKey('cates.id'))
+    img = db.Column(db.String(16), unique=True)
     orders = db.relationship('Order', secondary='order_item', backref='item')
     users = db.relationship('User', secondary='carts', backref='item')
 
