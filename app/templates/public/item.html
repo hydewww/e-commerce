@@ -20,5 +20,5 @@ category: {{ item.cate.name }}
 <br>
 <a href="{{ url_for('buy.add2cart', id=item.id) }}">add2cart</a>
 <br>
-<a href="{{ url_for('buy.buy', id=item.id) }}">buy</a>
+<a href="{{ url_for('buy.buy_item', id=item.id) }}">buy</a>
 {% endblock %}

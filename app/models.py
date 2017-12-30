@@ -50,6 +50,7 @@ class Cate(db.Model):
     def __repr__(self):
         return self.name
 
+
 class Item(db.Model):
     __tablename__ = 'items'
     id = db.Column(db.Integer, primary_key=True)
@@ -74,13 +75,21 @@ class Item(db.Model):
     def __repr__(self):
         return '<Item %r>' % self.name
 
+
+class Status:
+    ORDERED = 0
+    PAIED = 1
+    DELIVERED = 2
+    RECEIVED = 3
+    
+
 class Order(db.Model):
     __tablename__ = 'orders'
     id = db.Column(db.Integer, primary_key=True)
     buyer_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     date = db.Column(db.DateTime, default=datetime.datetime.now)
-    status = db.Column(db.Boolean, default=False)
+    status = db.Column(db.Integer, default=Status.ORDERED)
     items = db.relationship('Item', secondary='order_item', backref='order')
 
     def __init__(self, buyer_id, owner_id):

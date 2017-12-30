@@ -34,7 +34,13 @@
                 {% endfor %}
                 </tbody>
         </table>
-        <div>{% if order.status %}已发货{% else %}未发货{% endif %}</div>
+        <div>
+            {% if order.status == 0 %}未付款，<a href="{{ url_for('buy.pay', order_id=order.id) }}">付款</a>
+            {% elif order.status == 1 %}未发货
+            {% elif order.status == 2 %}已发货，<a href="{{ url_for('buy.receive', order_id=order.id) }}">确认收货</a>
+            {% else %}已完成
+            {% endif %}
+        </div>
         <br>
     {% endfor %}
 </div>

@@ -1,12 +1,9 @@
 from flask import render_template, redirect, url_for, flash
 from . import sell
-# from .. import db, images
 from .. import db, images
 from ..models import Item, Cate, Order_Item, Order
 from flask_login import login_required, current_user
 from .forms import ItemForm
-# import os.path
-# from config import Config
 
 
 @sell.route('/upload', methods=['GET', 'POST'])
@@ -34,12 +31,6 @@ def upload():
         item.img = filename
         db.session.add(item)
         db.session.commit()
-        # full_filename = Config.UPLOADED_IMAGES_DEST + '\\' + filename
-        # print('TEST' + full_filename)
-        # file_extension = os.path.splitext(full_filename)[1]
-        # os.rename(full_filename, (Config.UPLOADED_IMAGES_DEST+'\\'+str(item.id)+file_extension) )
-        # imag_name[item.id] = str(item.id) + file_extension
-        #file_url = photos.url(filename)
         flash("Upload Success.")
         return redirect(url_for('sell.upload'))
     return render_template("sell/upload.html", form=form)
@@ -59,9 +50,9 @@ def order():
 @sell.route('/deliver/<int:order_id>')
 @login_required
 def deliver(order_id):
-    order = Order.query.filter_by(id=order_id).first()
-    if order and order.owner_id == current_user.id:
-        order.status = True
+    order = Order.query.filter_by(id=order_id).first_or_404()
+    if order.owner_id == current_user.id and order.status == 1:
+        order.status = 2
         db.session.add(order)
         db.session.commit()
         flash("Deliver Success")

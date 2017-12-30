@@ -27,7 +27,13 @@
                 {% endfor %}
                 </tbody>
         </table>
-        <div>{% if order.status %}已发货{% else %}未发货，<a href="{{ url_for('sell.deliver', order_id=order.id) }}">发货</a>{% endif %}</div>
+        <div>
+            {% if order.status == 0 %}未付款
+            {% elif order.status == 1 %}未发货，<a href="{{ url_for('sell.deliver', order_id=order.id) }}">发货</a>
+            {% elif order.status == 2 %}已发货
+            {% else %}已完成
+            {% endif %}
+        </div>
         <br>
     {% endfor %}
 </div>
