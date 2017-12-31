@@ -41,10 +41,14 @@ def upload():
 def order():
     orders = Order.query.filter_by(owner_id=current_user.id).all()
     itemslist = []
+    img_dict = {}
     for order in orders:
         items = Order_Item.query.filter_by(order_id=order.id).all()
+        for item in items:
+            item_img = Item.query.filter_by(id=item.item_id).first().img
+            img_dict[item.item_id] = item_img
         itemslist.append(items)
-    return render_template("sell/order.html", orders=orders, itemslist=itemslist)
+    return render_template("sell/order.html", orders=orders, itemslist=itemslist, images=images, img_dict=img_dict)
 
 
 @sell.route('/deliver/<int:order_id>')
