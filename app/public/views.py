@@ -27,5 +27,5 @@ def owner(owner_id):
 @public.route('/item/<int:item_id>')
 def item(item_id):
     item = Item.query.filter_by(id=item_id).first_or_404()
-   # owner = User.query.filter_by(id=item.owner_id).first()
-    return render_template("public/item.html", item=item, images=images)
+    owner = User.query.filter_by(id=item.owner_id).first()
+    return render_template("public/item.html", item=item, images=images, owner=owner)

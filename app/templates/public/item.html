@@ -10,7 +10,7 @@
 <br>
 商品名称 : {{ item.name }}
 <br>
-<a href="{{ url_for('public.owner', owner_id=item.owner_id) }}">卖家 : {{ item.owner_id }}</a>
+卖家 :<a href="{{ url_for('public.owner', owner_id=item.owner_id) }}"> {{ owner.name }}</a>
 <br>
 价格 : {{ item.price }}
 <br>
