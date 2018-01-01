@@ -95,7 +95,7 @@ def buy_item(id):
 @login_required
 def pay(order_id):
     order = Order.query.filter_by(id=order_id).first_or_404()
-    if order.owner_id == current_user.id and order.status == 0:
+    if order.buyer_id == current_user.id and order.status == 0:
         order.status = 1
         db.session.add(order)
         db.session.commit()
@@ -107,7 +107,7 @@ def pay(order_id):
 @login_required
 def receive(order_id):
     order = Order.query.filter_by(id=order_id).first_or_404()
-    if order.owner_id == current_user.id and order.status == 2:
+    if order.buyer_id == current_user.id and order.status == 2:
         order.status = 3
         db.session.add(order)
         db.session.commit()

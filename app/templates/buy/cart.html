@@ -10,16 +10,16 @@
 </style>
 
 <div class="page-header">
-    <h1>Cart List</h1>
+    <h1>购物车列表</h1>
 </div>
 <div class="container main-container">
     <table class="table table-striped">
         <thead>
             <tr>
-                <td><b>Img</b></td>
-                <td><b>Name</b></td>
-                <td><b>Price</b></td>
-                <td><b>Num</b></td>
+                <td><b>商品图像</b></td>
+                <td><b>名称</b></td>
+                <td><b>价格</b></td>
+                <td><b>数量</b></td>
             </tr>
         </thead>
         <tbody>
@@ -29,13 +29,13 @@
                 <td><span class="td-font">{{ item.name }}</span></td>
                 <td><span class="td-font">{{ item.price }}</span></td>
                 <td><span class="td-font">{{ cart[loop.index0].num }}</span></td>
-                <td><a href="{{ url_for('public.item', item_id=item.id) }}"class="td-font">More</a></td>
+                <td><a href="{{ url_for('public.item', item_id=item.id) }}"class="td-font">详情</a></td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
     <br>
-    <a href="{{ url_for('buy.buy_cart') }}">买买买</a>
+    <a href="{{ url_for('buy.buy_cart') }}">确认下单</a>
 </div>
 <br>
 {% endblock %}

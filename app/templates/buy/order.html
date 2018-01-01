@@ -10,17 +10,17 @@
 </style>
 
 <div class="page-header">
-    <h1>Order List</h1>
+    <h1>订单列表</h1>
 </div>
 <div class="container main-container">
     {% for order in orders %}
-        <div>{{ order.date }}</div>
+        <div>下单时间 : {{ order.date }}</div>
         <table class="table table-striped">
             <thead>
                     <tr>
-                        <td><b>Img</b></td>
-                        <td><b>Item Id</b></td>
-                        <td><b>Num</b></td>
+                        <td><b>商品图像</b></td>
+                        <td><b>序号</b></td>
+                        <td><b>数量</b></td>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,7 +29,7 @@
                         <td><span><img src="{{ images.url(img_dict[item.item_id])}}" height="100px" width="100px"></span></td>
                         <td><span class="td-font">{{ item.item_id }}</span></td>
                         <td><span class="td-font">{{ item.num }}</span></td>
-                        <td><a href="{{ url_for('public.item', item_id=item.id) }}" class="td-font">More</a></td>
+                        <td><a href="{{ url_for('public.item', item_id=item.id) }}" class="td-font">详情</a></td>
                     </tr>
                 {% endfor %}
                 </tbody>

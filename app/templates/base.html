@@ -12,21 +12,21 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">不存在的淘宝</a>
+            <a class="navbar-brand" href="/">淘宝宝</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="{{ url_for('buy.cart') }}">Cart</a></li>
-                <li><a href="{{ url_for('buy.order') }}">Order</a></li>
+                <li><a href="{{ url_for('buy.cart') }}">购物车</a></li>
+                <li><a href="{{ url_for('buy.order') }}">已购订单</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{ url_for('sell.order') }}">Order</a></li>
-                <li><a href="{{ url_for('sell.upload') }}">Upload</a></li>
+                <li><a href="{{ url_for('sell.order') }}">已售订单</a></li>
+                <li><a href="{{ url_for('sell.upload') }}">上传商品</a></li>
                 {% if current_user.is_authenticated %}                
-                <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
+                <li><a href="{{ url_for('auth.logout') }}">登出</a></li>
                 {% else %}
-                <li><a href="{{ url_for('auth.register') }}">Register</a></li>
-                <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
+                <li><a href="{{ url_for('auth.register') }}">注册</a></li>
+                <li><a href="{{ url_for('auth.login') }}">登入</a></li>
                 {% endif %}
             </ul>
         </div>

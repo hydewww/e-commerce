@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, url_for
 from . import public
 from .. import db, images
-from ..models import Item, Cate
+from ..models import Item, Cate, User
 
 
 @public.route('/')
@@ -15,16 +15,17 @@ def index():
 def cate(cate_id):
     cates = Cate.query.all()
     items = Item.query.filter_by(cate_id=cate_id).all()
-    return render_template("public/itemlist.html", items=items, cates=cates)
+    return render_template("public/itemlist.html", items=items, cates=cates, images=images)
 
 
 @public.route('/owner/<int:owner_id>')
 def owner(owner_id):
     items = Item.query.filter_by(owner_id=owner_id).all()
-    return render_template("public/itemlist.html", items=items)
+    return render_template("public/itemlist.html", items=items, images=images)
 
 
 @public.route('/item/<int:item_id>')
 def item(item_id):
     item = Item.query.filter_by(id=item_id).first_or_404()
-    return render_template("public/item.html", item=item)
+   # owner = User.query.filter_by(id=item.owner_id).first()
+    return render_template("public/item.html", item=item, images=images)
