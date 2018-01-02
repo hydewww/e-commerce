@@ -9,7 +9,8 @@ from sqlalchemy import desc
 @buy.route("/cart")
 @login_required
 def cart():
-    cart = Cart.query.filter_by(user_id=current_user.id).all()
+    # cart = Cart.query.filter_by(user_id=current_user.id).all()
+    cart = db.session.execute("SELECT * FROM carts WHERE carts.user_id="+str(current_user.id)).fetchall()
     items = current_user.items
     return render_template("buy/cart.html", items=items, cart=cart, images=images)
 
@@ -17,13 +18,17 @@ def cart():
 @buy.route("/order")
 @login_required
 def order():
-    orders = Order.query.filter_by(buyer_id=current_user.id).all()
+    # orders = Order.query.filter_by(buyer_id=current_user.id).all()
+    orders = db.session.execute("SELECT * FROM orders WHERE orders.buyer_id="+str(current_user.id)).fetchall()
     itemslist = []
     img_dict = {}
     for order in orders:
-        items = Order_Item.query.filter_by(order_id=order.id).all()
+        # items = Order_Item.query.filter_by(order_id=order.id).all()
+        items = db.session.execute("SELECT * FROM order_item WHERE order_item.order_id="+str(order.id)).fetchall()
         for item in items:
-            item_img = Item.query.filter_by(id=item.item_id).first().img
+            # item_img = Item.query.filter_by(id=item.item_id).first().img
+            item_imgg = db.session.execute("SELECT * FROM items WHERE items.id="+str(item.item_id)).fetchone()
+            item_img = item_imgg.img
             img_dict[item.item_id] = item_img
         itemslist.append(items)
     return render_template("buy/order.html", orders=orders, itemslist=itemslist, images=images, img_dict=img_dict)
@@ -32,7 +37,8 @@ def order():
 @buy.route("/add2cart/<int:id>")
 @login_required
 def add2cart(id):
-    item = Item.query.filter_by(id=id).first_or_404()
+    # item = Item.query.filter_by(id=id).first_or_404()
+    item = db.session.execute("SELECT * FROM items WHERE items.id="+str(id)).fetchone()
     cart = Cart.query.filter_by(user_id=current_user.id, item_id=item.id).first()
     if cart:
         cart.num += 1
