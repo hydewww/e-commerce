@@ -5,7 +5,7 @@ from ..models import Item, Cate, User
 from .forms import SearchForm
 
 
-@public.route('/')
+@public.route('/', methods=['GET', 'POST'])
 def index():
     #cates = Cate.query.all()
     cates = db.session.execute("SELECT * FROM cates").fetchall()
@@ -15,11 +15,11 @@ def index():
     form = SearchForm()
     if form.validate_on_submit():
         items = Item.query.filter_by(name=form.itemname.data).all()
-        return render_template("public/itemlist.html", items=items, cates=cates, images=images)
-    return render_template("public/itemlist.html", items=items, cates=cates, images=images)
+        return render_template("public/itemlist.html", items=items, cates=cates, images=images, form=form)
+    return render_template("public/itemlist.html", items=items, cates=cates, images=images, form=form)
 
 
-@public.route('/cate/<int:cate_id>')
+@public.route('/cate/<int:cate_id>', methods=['GET', 'POST'])
 def cate(cate_id):
     #cates = Cate.query.all()
     cates = db.session.execute("SELECT * FROM cates").fetchall()
@@ -31,8 +31,8 @@ def cate(cate_id):
     form = SearchForm()
     if form.validate_on_submit():
         items = Item.query.filter_by(name=form.itemname.data).all()
-        return render_template("public/itemlist.html", items=items, cates=cates, images=images)
-    return render_template("public/itemlist.html", items=items, cates=cates, images=images)
+        return render_template("public/itemlist.html", items=items, cates=cates, images=images, form=form)
+    return render_template("public/itemlist.html", items=items, cates=cates, images=images, form=form)
 
 
 @public.route('/owner/<int:owner_id>')

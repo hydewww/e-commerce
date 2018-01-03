@@ -5,7 +5,7 @@ from flask_script import Manager, Shell, Server
 
 app = create_app()
 manager = Manager(app)
-server = Server(port=33333)
+server = Server(host='0.0.0.0', port=8899)
 
 
 def make_shell_context():
