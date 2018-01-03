@@ -7,7 +7,6 @@ from wtforms import ValidationError
 from ..models import Item, Cate
 
 class ItemForm(FlaskForm):
-
     image=FileField('image', validators=[FileAllowed(images,'only images'), FileRequired('please choose an image')])
     name = StringField('Name')
     price = IntegerField('Price')

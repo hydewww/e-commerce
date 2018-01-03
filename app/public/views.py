@@ -2,6 +2,7 @@ from flask import render_template, request, redirect, url_for
 from . import public
 from .. import db, images
 from ..models import Item, Cate, User
+from .forms import SearchForm
 
 
 @public.route('/')
@@ -11,6 +12,10 @@ def index():
     # print(Cate.query)
     #items = Item.query.all()
     items = db.session.execute("SELECT * FROM items").fetchall()
+    form = SearchForm()
+    if form.validate_on_submit():
+        items = Item.query.filter_by(name=form.itemname.data).all()
+        return render_template("public/itemlist.html", items=items, cates=cates, images=images)
     return render_template("public/itemlist.html", items=items, cates=cates, images=images)
 
 
@@ -23,6 +28,10 @@ def cate(cate_id):
     items = db.session.execute("SELECT  * FROM items WHERE items.cate_id = "+str(cate_id)).fetchall()
     #print(items)
     #print(Item.query.filter_by(cate_id=cate_id))
+    form = SearchForm()
+    if form.validate_on_submit():
+        items = Item.query.filter_by(name=form.itemname.data).all()
+        return render_template("public/itemlist.html", items=items, cates=cates, images=images)
     return render_template("public/itemlist.html", items=items, cates=cates, images=images)
 
 
