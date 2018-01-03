@@ -39,7 +39,11 @@ def cate(cate_id):
 def owner(owner_id):
     #items = Item.query.filter_by(owner_id=owner_id).all()
     items = db.session.execute("SELECT * FROM items WHERE items.owner_id = "+str(owner_id)).fetchall()
-    return render_template("public/itemlist.html", items=items, images=images)
+    form = SearchForm()
+    if form.validate_on_submit():
+        items = Item.query.filter_by(name=form.itemname.data).all()
+        return render_template("public/itemlist.html", items=items, cates=cates, images=images, form=form)
+    return render_template("public/itemlist.html", items=items, images=images, form=form)
 
 
 @public.route('/item/<int:item_id>')
